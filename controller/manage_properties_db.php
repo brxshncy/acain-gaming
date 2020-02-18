@@ -1,0 +1,175 @@
+<?php
+require('db.php');
+
+	if(isset($_POST['submit'])) {
+		$date_inquire = $_POST['date_inquire'];
+		$owner_fname = $_POST['owner_fname'];
+		$owner_lname = $_POST['owner_lname'];
+		$owner_mname = $_POST['owner_mname'];
+		$owner_address = $_POST['owner_address'];
+		$owner_bday = $_POST['owner_bday'];
+		$owner_contact = $_POST['owner_contact'];
+		$civil_status = $_POST['civil_status'];
+		$gender = $_POST['gender'];
+		$property_id = $_POST['prop_id'];
+		$property_brgy = $_POST['property_brgy'];
+		$property_address = $_POST['property_address'];
+		$kind_prop = $_POST['kind_prop'];
+		$actual_use = $_POST['actual_use'];
+		$north = $_POST['north'];
+		$east = $_POST['east'];
+		$west = $_POST['west'];
+		$south = $_POST['south'];
+		$prop_measurement = $_POST['prop_measurement'];
+		$prev_text_payment = $_POST['prev_text_payment'];
+		$prop_value = $_POST['prop_value'];
+		$payment_status = $_POST['payment_status'];
+		$team_id = $_POST['compositive'];
+		$status = $_POST['status'];
+
+		$owner_insert = "INSERT INTO owner 
+		(
+			fname,
+			lname,
+			mname,
+			address,
+			birthday,
+			status,
+			gender,
+			contact
+		)
+		VALUES
+		(
+			'$owner_fname',
+			'$owner_lname',
+			'$owner_mname',
+			'$owner_address',
+			'$owner_bday',
+			'$civil_status',
+			'$gender',
+			'$owner_contact'
+		)
+		";
+		$owner_query = $conn->query($owner_insert) or trigger_error(mysqli_error($conn)." ".$owner_insert);
+		if($owner_query){
+			$owner_id = $conn->insert_id;
+			echo $owner_id;
+			$property_insert = "INSERT INTO property
+			(
+				date_inquire,
+				owner_id,
+				property_id,
+				property_brgy,
+				property_address,
+				kind_prop,
+				actual_use,
+				north,
+				east,
+				west,
+				south,
+				prop_measurement,
+				prop_value,
+				prev_text_payment,
+				payment_status,
+				team_id,
+				status
+			)
+			VALUES
+			(
+				'$date_inquire',
+				'$owner_id',
+				'$property_id',
+				'$property_brgy',
+				'$property_address',
+				'$kind_prop',
+				'$actual_use',
+				'$north',
+				'$east',
+				'$west',
+				'$south',
+				'$prop_measurement',
+				'$prop_value',
+				'$prev_text_payment',
+				'$payment_status',
+				'$team_id',
+				'$status'
+			)
+			";
+			$property_query = $conn->query($property_insert) or trigger_error(mysqli_error($conn)." ".$property_insert);
+			if($property_insert){
+				session_start();
+				$_SESSION['suc'] == "Property details recorded successfully";
+				header("location:../manage_properties.php");
+			}
+			else{
+				echo "fail".mysqli_error($conn);
+			}
+		}
+		
+	
+}
+else if(isset($_POST['add'])){
+	$date_acquired = date("Y-m-d",strtotime($_POST['date_acquired']));
+	$owner_id = $_POST['owner_id'];
+	$prop_id = $_POST['prop_id'];
+	$property_brgy = $_POST['property_brgy'];
+	$property_address = $_POST['property_address'];
+	$kind_prop = $_POST['kind_prop'];
+	$actual_use = $_POST['actual_use'];
+	$north = $_POST['north'];
+	$east = $_POST['east'];
+	$west = $_POST['west'];
+	$south = $_POST['south'];
+	$prop_measurement = $_POST['prop_measurement'];
+	$prop_value = $_POST['prop_value'];
+	$compositive = $_POST['compositive'];
+	$status = $_POST['status'];
+
+		$property_insert = "INSERT INTO property
+			(
+				date_inquire,
+				owner_id,
+				property_id,
+				property_brgy,
+				property_address,
+				kind_prop,
+				actual_use,
+				north,
+				east,
+				west,
+				south,
+				prop_measurement,
+				prop_value,
+				team_id,
+				status
+			)
+			VALUES
+			(
+				'$date_acquired',
+				'$owner_id',
+				'$prop_id',
+				'$property_brgy',
+				'$property_address',
+				'$kind_prop',
+				'$actual_use',
+				'$north',
+				'$east',
+				'$west',
+				'$south',
+				'$prop_measurement',
+				'$prop_value',
+				'$compositive',
+				'$status'
+			)
+			";
+			$qry = $conn->query($property_insert) or trigger_error(mysqli_error($conn)." ".$property_insert);
+
+			if($qry){
+				echo "success";
+			}
+			else{
+				echo "error";
+			}
+}
+
+
