@@ -13,7 +13,6 @@ if(isset($_POST['submit'])){
 		$role = $_POST['role'];
 		$team = $_POST['team'];
 
-		echo $role."<br>".$team;
 		$insert = "INSERT INTO 
 		staff 
 		(
@@ -50,6 +49,47 @@ if(isset($_POST['submit'])){
 		else{
 			echo "error backend";
 		}
+}
+if(isset($_POST['register'])){
+	$fname = $_POST['fname'];
+	$lname = $_POST['lname'];
+	$address = $_POST['address'];
+	$contact = $_POST['contact'];
+	$bday = $_POST['bday'];
+	$gender = $_POST['gender'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+	$appraiser = "INSERT INTO office_appraiser
+	(
+		fname,
+		lname,
+		address,
+		contact,
+		bday,
+		gender,
+		username,
+		password
+	)
+	VALUES
+	(
+	  '$fname',
+	  '$lname',
+	  '$address',
+	  '$contact',
+	  '$bday',
+	  '$gender',
+	  '$username',
+	  '$password'
+	)
+	";
+	$qry = $conn->query($appraiser) or trigger_error(mysqli_error($conn)." ".$appraiser);
+
+	if($qry){
+		session_start();
+		$_SESSION['suc'] = "Appraiser registered successfully";
+		header("location:../manage_employee.php");
+	}
 }
 
 

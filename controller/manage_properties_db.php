@@ -26,6 +26,7 @@ require('db.php');
 		$payment_status = $_POST['payment_status'];
 		$team_id = $_POST['compositive'];
 		$status = $_POST['status'];
+		$appraiser = $_POST['appraiser'];
 
 		$owner_insert = "INSERT INTO owner 
 		(
@@ -72,7 +73,8 @@ require('db.php');
 				prev_text_payment,
 				payment_status,
 				team_id,
-				status
+				status,
+				office_appraiser_id
 			)
 			VALUES
 			(
@@ -92,14 +94,24 @@ require('db.php');
 				'$prev_text_payment',
 				'$payment_status',
 				'$team_id',
-				'$status'
+				'$status',
+				'$appraiser'
 			)
 			";
 			$property_query = $conn->query($property_insert) or trigger_error(mysqli_error($conn)." ".$property_insert);
 			if($property_insert){
-				session_start();
-				$_SESSION['suc'] == "Property details recorded successfully";
-				header("location:../manage_properties.php");
+
+				$update_status = "UPDATE team SET status = 1 WHERE id ='$team_id'";
+				$queque = $conn->query($update_status) or trigger_error(mysqli_error($conn)." ".$update_status);
+
+				if($queque){
+					session_start();
+					$_SESSION['daaa'] = "Property details saved successfully";
+					header("location:../manage_properties.php");
+				}
+				else{
+					echo "fail";
+				}
 			}
 			else{
 				echo "fail".mysqli_error($conn);

@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require('db.php');
 
 if(isset($_POST['submit'])){
@@ -22,8 +22,10 @@ if(isset($_POST['submit'])){
 	if($role == 'office_appraiser'){
 		$office_appraiser = "SELECT * FROM office_appraiser WHERE username = '$username' AND password = '$password'";
 		$qry_1 = $conn->query($office_appraiser) or trigger_error(mysqli_error($conn)." ".$office_appraiser);
-
+		$a = mysqli_fetch_assoc($qry_1);
 		if(mysqli_num_rows($qry_1) == 1){
+			session_start();
+			$_SESSION['id'] = $a['id'];
 			header("location:../staff_dashboard.php");
 		}
 		else{

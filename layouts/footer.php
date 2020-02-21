@@ -49,6 +49,9 @@
             $('#add_staff').click(function(){
                 $('#compositive_modal').modal('show');
             })
+            $('#add_appraiser').click(function(){
+                $('#appraiser_modal').modal('show');
+            })
              $('#add_team').click(function(){
                 $('#team_modal').modal('show');
             })

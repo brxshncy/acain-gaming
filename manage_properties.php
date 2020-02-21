@@ -21,14 +21,14 @@
                 	</div>
                 </div>
                 <?php
-    			if(isset($_SESSION['suc'])):?>
-    				<div class="row mt-2">
-    					<div class="col">
+    			if(isset($_SESSION['daaa'])):?>
+    				<div class="row mt-2 justify-content-center">
+    					<div class="col col-md-10">
     						<div class="alert alert-success">
     							<p class="text-center">
     								<?php 
-    									  echo $_SESSION['suc']; 
-    									  unset($_SESSION['suc']);
+    									  echo $_SESSION['daaa']; 
+    									  unset($_SESSION['daaa']);
     								?>
     							</p>
     						</div>
@@ -62,8 +62,8 @@
 					    	<td class="text-center"><?php echo ucwords($a['name']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_id']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['p_address']); ?></td>
-                            <td class="text-center"><?php echo $a['measurement']." sqm"; ?></td>
-                            <td class="text-center"><?php echo $a['value'] ?></td>
+                            <td class="text-center"><?php echo number_format($a['measurement'],-1)." sqm"; ?></td>
+                            <td class="text-center">&#8369; <?php  echo number_format($a['value']) ?></td>
                             <?php
                                 $tax = "SELECT * FROM tax_percentage";
                                 $qry_1 =$conn->query($tax) or trigger_error(mysqli_error($conn)." ".$tax);
@@ -71,7 +71,7 @@
                                 $tax =  $a['value'] * $b['tax'];
                             ?>  
                             <td class="text-center">
-                                <?php echo $tax ?>
+                               &#8369; <?php echo number_format($tax) ?>
                             </td>
                             <td class="text-center">
                                 <?php

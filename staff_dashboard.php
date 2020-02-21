@@ -6,12 +6,11 @@
 	include ('stafflayouts/header.php');
  ?>
 <?php 
-if(isset($_SESSION['username'])){
+if(isset($_SESSION['id'])){
+        $session_id = $_SESSION['id'];
     		require('controller/db.php');
-    		$username = $_SESSION['username'];
-    		$staff = $conn->query("SELECT *, CONCAT(staff.fname,' ',staff.lname) as name FROM staff WHERE username = '$username'");
+    		$staff = $conn->query("SELECT *, CONCAT(staff.fname,' ',staff.lname) as name FROM staff WHERE id = '$session_id'");
     		$a = mysqli_fetch_assoc($staff);
-    		$_SESSION['name'] = $a['name'];
     	}
 include('stafflayouts/sidebar.php'); 
 ?>

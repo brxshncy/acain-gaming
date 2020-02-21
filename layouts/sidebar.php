@@ -12,11 +12,11 @@
                             <li class="active">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                                 <ul class="collapse">
+                                    <li class="<?php echo $currentPage === 'Manage Appraiser' ? 'active' : '' ?>">
+                                        <a href="manage_employee.php">Manage Appraiser</a>
+                                    </li>
                                     <li class="<?php echo $currentPage === 'Manage Compositive' ? 'active' : '' ?>">
                                         <a href="manage_compositive.php">Manage Compositive</a>
-                                    </li>
-                                    <li class="<?php echo $currentPage === 'Manage Emloyee' ? 'active' : '' ?>">
-                                        <a href="manage_employee.php">Manage Employee</a>
                                     </li>
                                      <li class="<?php echo $currentPage === 'Tax' ? 'active' : '' ?>">
                                         <a href="tax.php">Tax Formula</a>

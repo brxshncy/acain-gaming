@@ -1,8 +1,8 @@
 <?php 
 	session_start();
-	$currentPage = 'Manage Employee';
-	$title = 'Manage Employee';
-	$pageTitle = 'Manage Employee';
+	$currentPage = 'Manage Appraiser';
+	$title = 'Manage Appraiser';
+	$pageTitle = 'Manage Appraiser';
 	include ('layouts/header.php');
  ?>
 <?php include('layouts/sidebar.php'); ?>
@@ -26,21 +26,7 @@
 
  <div class="main-content-inner">
      <div class="row justify-content-center">
-        <div class="col col-md-8">
-        	<?php
-        		if(isset($_SESSION['team-added'])):?>
-        			<div class="row mt-2">
-        				<div class="col">
-        					<div class="alert alert-success">
-        						<p>
-        							<?php echo $_SESSION['team-added'];
-        								  unset($_SESSION['team-added']);
-        							 ?>
-        						</p>
-        					</div>
-        				</div>
-        			</div>
-        	<?php endif ?>
+        <div class="col col-md-10">
         	<div class="row mt-2">
         		<div class="col">
         			<div class="pull-right">
@@ -50,16 +36,33 @@
                     </div>
         		</div>
         	</div>
+        	<?php
+        		if(isset($_SESSION['suc'])):?>
+        			<div class="row mt-2">
+        				<div class="col">
+        					<div class="alert alert-success">
+        						<p class="text-center">
+        							<?php echo $_SESSION['suc'];
+        								  unset($_SESSION['suc']);
+        							 ?>
+        						</p>
+        					</div>
+        				</div>
+        			</div>
+        	<?php endif ?>
             <div class="row">
                <div class="col-12">
-                  <div class="card mt-3 p-3">
+                  <div class="card  p-3">
                     <table class="table table-striped table-bordered mt-2">
                     	<thead>
 						    <tr>
 						      <th scope="col" class="text-center">No.</th>
-						      <th scope="col" class="text-center">First Name</th>
-						      <th scope="col" class="text-center">Last Name</th>
-						      <th scope="col" class="text-center">Username</th>
+						      <th scope="col" class="text-center">Full Name</th>
+						      <th scope="col" class="text-center">Address</th>
+						      <th scope="col" class="text-center">Contact</th>
+						      <th scope="col" class="text-center">Gender</th>
+						      <th scope="col" class="text-center">Age</th>
+						      <th scope="col" class="text-center">Usernmae</th>
 						      <th scope="col" class="text-center">Password</th>
 						      <th scope="col" class="text-center">Action</th>
 						    </tr>
@@ -73,12 +76,20 @@
 					  		while($row = mysqli_fetch_assoc($qry)){ $counter++; ?>
 					  		<tr>
 					  			<td class="text-center"><?php echo $counter; ?></td>
-					  			<td class="text-center"><?php echo $row['fname']; ?></td>
-					  			<td class="text-center"><?php echo $row['lname']; ?></td>
+					  			<td class="text-center"><?php echo ucwords($row['fname']." ".$row['lname']); ?></td>
+					  			<td class="text-center"><?php echo ucwords($row['address']); ?></td>
+					  			<td class="text-center"><?php echo $row['contact']; ?></td>
+					  			<td class="text-center"><?php echo $row['gender']; ?></td>
+					  			<?php
+					  				$currYear = date("Y");
+					  				$birthYear = date("Y",strtotime($row['bday']));
+					  				$age = $currYear - $birthYear;
+					  			?>
+					  			<td class="text-center"><?php echo $age; ?></td>
 					  			<td class="text-center"><?php echo $row['username']; ?></td>
 					  			<td class="text-center"><?php echo $row['password']; ?></td>
 					  			<td class="text-center">
-					  			<a href="members.php?q=<?php echo $row['id'] ?>" >
+					  			<a href="javascript:void(0)" id="<?php echo $row['id'] ?>">
 					  				<i class="fa fa-users text-info" title="Members" data-placement="top"></i>
 					  			</a>
 					  			</a>

@@ -4,6 +4,7 @@
     $title = 'Property Form';
     $pageTitle = 'Property Form';
     include ('stafflayouts/header.php');
+
  ?>
 <?php include('stafflayouts/sidebar.php'); ?>
 <div class="main-content-inner">
@@ -208,7 +209,7 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label>Tax Payment Status</label>
-                <select name="payment_status" class="form-control" required="">
+                <select name="payment_status" class="form-control">
                   <option value=""></option>
                   <option value="Paid">Paid</option>
                   <option value="Unpaid">Unpaid</option>
@@ -234,10 +235,26 @@
             </select> 
            </div>
         </div>
-        <div class="col md-1">
-          <input type="hidden" name="status" value="0">
+        <div class="col col-md-2">
         </div>
+          <?php
+              $id = $_SESSION['id'];
+              $appraiser = "SELECT * FROM office_appraiser WHERE id =$id";
+              $qry = $conn->query($appraiser) or trigger_error(mysqli_error($conn)." ".$appraiser);
+              $a = mysqli_fetch_assoc($qry);
+              $name = ucwords($a['fname']." ".$a['lname']);
+            ?>
+        <div class="col col-md-4">
+          <div class="form-group">
+            <label>Appraised by:</label>
+            <input type="hidden" name="appraiser" value="<?php echo $a['id']; ?>" class="form-control" readonly>
+            <input type="text" value="<?php echo $name; ?>" class="form-control" readonly>
+          </div>
+        </div>
+    </div>
+     <div class="row mt-4">
         <div class="col col-md-4 pt-4">
+            <input type="hidden" name="status" value="0">
            <button type="submit" name="submit" class="btn btn-success btn-block">Submit</button>
         </div>
     </div>

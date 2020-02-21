@@ -115,7 +115,7 @@
                     }
                 })
             })
-            $('.view_props').click(function(){
+            $(document).on('click','.view_props',function(){
                 let prop_id = $(this).attr('id');
                 console.log(prop_id);
                 $.ajax({
