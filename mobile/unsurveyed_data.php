@@ -17,7 +17,7 @@ if(isset($_POST['showdata'])){
 		 $west = $a['west'];
 		 $east = $a['east'];
 		 $measurement = $a['measurement'];
-		 $value = $a['value'];
+		 $value = "&#8369; ".number_format($a['value'],-1);
 		 
 
 		$data[] = array(

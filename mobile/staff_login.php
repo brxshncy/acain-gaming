@@ -20,7 +20,20 @@
 				$data['role'] = $_SESSION['role'];
 				$data['id'] = $_SESSION['id'];
 				echo json_encode($data);
-			}
+		}
+		else if(mysqli_num_rows($qry) == 1 && $_SESSION['role'] == 'Examiner'){
+			$data['role'] = $_SESSION['role'];
+				$data['id'] = $_SESSION['id'];
+				echo json_encode($data);
+		}
+		else if(mysqli_num_rows($qry) == 1 && $_SESSION['role'] == 'Tax Mapper'){
+				$data['role'] = $_SESSION['role'];
+				$data['id'] = $_SESSION['id'];
+				echo json_encode($data);
+		}
+		else{
+			echo json_encode("invalid");
+		}
 		
 	}
 ?>
