@@ -74,7 +74,7 @@
                                     <td class="text-center"><?php echo ucwords($row['address']); ?></td>
                                     <td class="text-center"><?php echo $row['contact']; ?></td>
                                     <td class="text-center">
-                                        <a href="javascript:void(0)" class="property_owned" id="<?php echo $row['o_id'] ?>" title="View Properties">
+                                        <a href="property_owned.php?q=<?php echo $row['o_id'] ?>"  title="<?php echo $row['number_properties']; ?> Property Owned">
                                             <?php echo $row['number_properties']; ?>
                                         </a>
                                     </td>

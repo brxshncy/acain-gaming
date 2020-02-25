@@ -140,6 +140,7 @@ else if(isset($_POST['add'])){
 	$status = $_POST['status'];
 	$appraiser = $_POST['appraiser'];
 
+
 		$property_insert = "INSERT INTO property
 			(
 				date_inquire,
