@@ -1,4 +1,4 @@
- <!-- sidebar menu area start -->
+     <!-- sidebar menu area start -->
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
@@ -19,7 +19,7 @@
                                         <a href="manage_compositive.php">Manage Compositive</a>
                                     </li>
                                      <li class="<?php echo $currentPage === 'Property Reports' ? 'active' : '' ?>">
-                                        <a href="manage_employee.php">Property Reports</a>
+                                        <a href="property_reports.php">Property Reports</a>
                                     </li>
                                      <li class="<?php echo $currentPage === 'Tax' ? 'active' : '' ?>">
                                         <a href="tax.php">Tax Formula</a>

@@ -18,7 +18,7 @@
         </div>
     </div>
      <div class="row">
-        <div class="col col-md-6">
+        <div class="col col-md-3">
             <div class="form-group">
                 <label>Barangay</label>
                 <select name="brgy" id="e_brgy" class="form-control">
@@ -33,15 +33,14 @@
                 </select>
             </div>
         </div>
-    </div>
-     <div class="row mt-2">
         <div class="col">
             <div class="form-group">
-                <label>Address</label>
-                <input type="text" name="address" id="e_address"  class="form-control">
+                <label>Street</label>
+                <input type="text" name="e_street" id="e_street"  class="form-control">
             </div>
         </div>
     </div>
+
     <div class="row mt-2">
         <div class="col col-md-6">
             <div class="form-group">

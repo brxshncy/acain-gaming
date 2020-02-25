@@ -13,7 +13,10 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>Manage Properties</span></a>
                                 <ul class="collapse">
                                      <li class="<?php echo $currentPage === 'Manage Properties' ? 'active' : '' ?>">
-                                        <a href="manage_properties.php">Property Records</a>
+                                        <a href="manage_properties.php">Unsurveyed Properties</a>
+                                    </li>
+                                     <li class="<?php echo $currentPage === 'Manage Property Owners' ? 'active' : '' ?>">
+                                        <a href="surveyed_properties.php">Surveyed Properties</a>
                                     </li>
                                     <li class="<?php echo $currentPage === 'Manage Property Owners' ? 'active' : '' ?>">
                                         <a href="manage_owners.php">Owner Records</a>

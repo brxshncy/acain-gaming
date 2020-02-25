@@ -83,10 +83,16 @@
           </select>
         </div>
       </div>
-       <div class="col col-md-9">
+       <div class="col col-md-6">
         <div class="form-group">
           <label>Address</label>
-           <input type="text" name="property_address" class="form-control">
+           <input type="text" name="street" class="form-control">
+        </div>
+      </div>
+       <div class="col col-md-3">
+        <div class="form-group">
+          <label>City</label>
+           <input type="text" name="city" class="form-control" value="Iligan City" readonly>
         </div>
       </div>
     </div>

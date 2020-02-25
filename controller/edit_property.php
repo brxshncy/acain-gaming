@@ -5,7 +5,7 @@ if(isset($_POST['update'])){
 	$id = $_POST['property_id'];
 	$prop_id = $_POST['prop_id'];
 	$brgy = $_POST['brgy'];
-	$address = $_POST['address'];
+	$e_street = $_POST['e_street'];
 	$kind_prop = $_POST['kind_prop'];
 	$actual_use = $_POST['actual_use'];
 	$north = $_POST['north'];
@@ -22,7 +22,8 @@ if(isset($_POST['update'])){
 	SET
 	property_id = '$prop_id',
 	property_brgy = '$brgy',
-	property_address = '$address',
+	street = '$e_street',
+	city = 'Iligan City',
 	kind_prop = '$kind_prop',
 	actual_use = '$actual_use',
 	north = '$north',

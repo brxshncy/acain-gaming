@@ -11,7 +11,7 @@ if(isset($_POST['id'])){
 	$data['id'] = $a['p_id'];
 	$data['property_id'] = $a['property_id'];
 	$data['property_brgy'] = $a['property_brgy'];
-	$data['property_address'] = ucwords($a['property_address']);
+	$data['street'] = ucwords($a['street']);
 	$data['kind_prop'] = $a['kind_prop'];
 	$data['actual_use'] = $a['actual_use'];
 	$data['north'] = $a['north'];

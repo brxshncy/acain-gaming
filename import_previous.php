@@ -65,7 +65,7 @@
 						  				?>
 					  				
 					  			</td>
-					  			<td class="text-center"><?php echo $row['property_address']; ?></td>
+					  			<td class="text-center"><?php echo ucwords($row['street']." ".$row['property_brgy'].", ".$row['city']); ?></td>
 					  			<td class="text-center"><?php echo "North: ".$row['north'].", East: ".$row['east'].",  West: ".$row['west'].", South: ".$row['south']; ?></td>
 					  			<td class="text-center">
 					  			

@@ -44,21 +44,54 @@
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/scripts.js"></script>
     <script>
-        $(document).ready(function(){
-            $('table').DataTable();
-            $('#add_staff').click(function(){
-                $('#compositive_modal').modal('show');
-            })
-            $('#add_appraiser').click(function(){
-                $('#appraiser_modal').modal('show');
-            })
-             $('#add_team').click(function(){
-                $('#team_modal').modal('show');
-            })
-             $('#update_tax').click(function(){
-                $('#tax_modal').modal('show');
-             })
+$(document).ready(function(){
+    $('table').DataTable();
+    $('#add_staff').click(function(){
+        $('#compositive_modal').modal('show');
+    })
+    $('#add_appraiser').click(function(){
+        $('#appraiser_modal').modal('show');
+    })
+    $('#add_team').click(function(){
+        $('#team_modal').modal('show');
+    })
+    $('#update_tax').click(function(){
+       $('#tax_modal').modal('show');
+    })
+    $(document).on('change','#monthly',function(){
+        let month = $('#monthly').val();
+        console.log(month);
+        $.ajax({
+            url:'ajax_calls/monthly_report.php',
+            method:'post',
+            data:{m:month},
+            success:function(data){
+                console.log(data);
+                $('#prop_reports').html(data);
+            },
+            error:function(err){
+                console.log(err);
+            }
         })
+    })
+    $(document).on('change','#year',function(){
+        let year = $('#year').val();
+        console.log(year);
+        $.ajax({
+            url:'ajax_calls/monthly_report.php',
+            method:'post',
+            data:{y:year},
+            success:function(data){
+                 console.log(data);
+                $('#prop_reports').html(data);
+               
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    })
+})
     </script>
 </body>
 

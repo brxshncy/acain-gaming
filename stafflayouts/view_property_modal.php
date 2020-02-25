@@ -65,17 +65,20 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col col-md-6">
-                            <label>Property Barangay</label>
+                        <div class="col col-md-3">
+                            <label>Barangay</label>
                             <input type="text" class="form-control" id="prop_brgy" readonly>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <label>Property Address</label>
+                         <div class="col col-md-6">
+                            <label>Street</label>
                             <input type="text" class="form-control" id="prop_address" readonly>
                         </div>
+                         <div class="col col-md-3">
+                            <label>City</label>
+                            <input type="text" class="form-control" id="prop_city" readonly>
+                        </div>
                     </div>
+
                     <div class="row mt-4">
                         <div class="col col-md-6">
                             <label>Kind of Property</label>

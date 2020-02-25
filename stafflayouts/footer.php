@@ -132,7 +132,8 @@
                         $('#contact').val(data.owner_contact);
                         $('#age').val(data.age);
                         $('#prop_brgy').val(data.property_brgy);
-                        $('#prop_address').val(data.property_address);
+                        $('#prop_address').val(data.street);
+                        $('#prop_city').val(data.city);
                         $('#kind_prop').val(data.kind_prop);
                         $('#actual_use').val(data.actual_use);
                         $('#prop_measurement').val(data.prop_measurement);
@@ -256,7 +257,7 @@ $.ajax({
                     $('#property_idd').val(data.id);
                     $('#prop_id').val(data.property_id);
                     $('#e_brgy').val(data.property_brgy);
-                    $('#e_address').val(data.property_address);
+                    $('#e_street').val(data.street);
                     $('#e_kind_prop').find(":selected").text(data.kind_prop);
                     $('#e_actual_use').find(":selected").text(data.actual_use);
                     $('#e_north').val(data.north);

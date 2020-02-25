@@ -65,7 +65,7 @@
                             ass="text-danger"></div>
                         </div>
                           <div class="form-gp">
-                            <select name="role" class="custom-select">
+                            <select name="role" class="custom-select" required="">
                                 <option value="">Log in as</option>
                                 <option value="assessor_admin">City Assessor Admin</option>
                                 <option value="office_appraiser">Office Appraiser</option>

@@ -13,6 +13,8 @@ require('db.php');
 		$gender = $_POST['gender'];
 		$property_id = $_POST['prop_id'];
 		$property_brgy = $_POST['property_brgy'];
+		$street = $_POST['street'];
+		$city = $_POST['city'];
 		$property_address = $_POST['property_address'];
 		$kind_prop = $_POST['kind_prop'];
 		$actual_use = $_POST['actual_use'];
@@ -62,6 +64,8 @@ require('db.php');
 				property_id,
 				property_brgy,
 				property_address,
+				street,
+				city,
 				kind_prop,
 				actual_use,
 				north,
@@ -126,6 +130,8 @@ else if(isset($_POST['add'])){
 	$prop_id = $_POST['prop_id'];
 	$property_brgy = $_POST['property_brgy'];
 	$property_address = $_POST['property_address'];
+	$street = $_POST['street'];
+	$city = $_POST['city'];
 	$kind_prop = $_POST['kind_prop'];
 	$actual_use = $_POST['actual_use'];
 	$north = $_POST['north'];
@@ -148,6 +154,8 @@ else if(isset($_POST['add'])){
 				property_id,
 				property_brgy,
 				property_address,
+				street,
+				city,
 				kind_prop,
 				actual_use,
 				north,
@@ -169,6 +177,8 @@ else if(isset($_POST['add'])){
 				'$prop_id',
 				'$property_brgy',
 				'$property_address',
+				'$street',
+				'$city'
 				'$kind_prop',
 				'$actual_use',
 				'$north',

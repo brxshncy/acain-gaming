@@ -67,10 +67,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                     <div class="form-group mt-4"> 
-                                    <input type="text" class="form-control text-center" value="<?php echo ucwords($a['address']); ?>" style="border-width: 0 0 2px; border-color: black">
-                                    <p class="text-center">Street & City</p>
+                                    <input type="text" class="form-control text-center" value="<?php echo ucwords($a['street']); ?>" style="border-width: 0 0 2px; border-color: black">
+                                    <p class="text-center">Street</p>
+                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="form-group mt-4"> 
+                                    <input type="text" class="form-control text-center" value="<?php echo ucwords($a['city']); ?>" style="border-width: 0 0 2px; border-color: black">
+                                    <p class="text-center">City</p>
                                     </div>
                             </div>
                         </div>

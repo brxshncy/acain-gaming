@@ -53,7 +53,7 @@
 					  <tbody>
 					    <?php
 					    	require('controller/db.php');
-					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name, p.status as status,p.prop_measurement as measurement, p.prop_value as value, p.property_address as p_address,p.property_id as property_id, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id ORDER BY p.id DESC";
+					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name, p.status as status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE p.status = 0 ORDER BY p.id DESC";
 					    	$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 					    	$counter = 0;
 					    	while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>
@@ -61,7 +61,7 @@
 					    	<td class="text-center"><?php echo $counter; ?></td>
 					    	<td class="text-center"><?php echo ucwords($a['name']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_id']); ?></td>
-                            <td class="text-center"><?php echo ucwords($a['p_address']); ?></td>
+                            <td class="text-center"><?php echo ucwords($a['property_brgy']." ".$a['street']." ".$a['city']); ?></td>
                             <td class="text-center"><?php echo number_format($a['measurement'],-1)." sqm"; ?></td>
                             <td class="text-center">&#8369; <?php  echo number_format($a['value']) ?></td>
                             <?php

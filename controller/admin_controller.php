@@ -15,6 +15,7 @@ if(isset($_POST['submit'])){
 			header("location:../dashboard.php");
 		}
 		else{
+			session_start();
 			$_SESSION['err'] = "Wrong Username or Password";
 			header("location:../index.php");
 		}
@@ -29,6 +30,7 @@ if(isset($_POST['submit'])){
 			header("location:../staff_dashboard.php");
 		}
 		else{
+			session_start();
 			$_SESSION['err'] = "Wrong Username or Password";
 			header("location:../index.php");
 		}
@@ -41,6 +43,7 @@ if(isset($_POST['submit'])){
 			header("location:../treasurer_dashboard.php");
 		}
 		else{
+			session_start();
 			$_SESSION['err'] = "Wrong Username or Password";
 			header("location:../index.php");
 		}
