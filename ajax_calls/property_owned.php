@@ -12,7 +12,7 @@ if(isset($_POST['id'])){
 	$counter = 0;
 	while($row = mysqli_fetch_assoc($qry)){ $counter++; ?>
  <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
-	<div class="row">
+	<div class="row mt-2">
 		<div class="col">
 		      		<b class="mr-1">Property ID:</b> <?php echo $row['property_id'] ?>
 		      		<br>
@@ -32,9 +32,9 @@ if(isset($_POST['id'])){
 		      		<br>
 		      		<b class="mr-1">South:</b> <?php echo $row['south'] ?>
 		      		<br>
-		      		<b class="mr-1">Area:</b> <?php echo $row['prop_measurement']." SQM" ?>
+		      		<b class="mr-1">Area:</b> <?php echo $row['prop_measurement']." sqm" ?>
 		      		<br>
-		      		<b class="mr-1">Value:</b> <?php echo $row['prop_value'] ?>
+		      		<b class="mr-1">Value:</b> <?php echo "&#8369;  ".number_format($row['prop_value'],-1); ?>
 		</div>
 	</div>
 </a>

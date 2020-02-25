@@ -112,13 +112,13 @@
       <div class="col">
         <div class="form-group">
           <label>North</label>
-          <input type="text" name="p_north" class="form-control" value="NW ">
+          <input type="text" name="p_north" class="form-control" >
         </div>
       </div>
        <div class="col">
         <div class="form-group">
           <label>East</label>
-          <input type="text" name="p_east" class="form-control" value="NE ">
+          <input type="text" name="p_east" class="form-control">
         </div>
       </div>
   </div>
@@ -126,13 +126,13 @@
       <div class="col">
         <div class="form-group">
           <label>West</label>
-          <input type="text" name="p_west" class="form-control" value="SW ">
+          <input type="text" name="p_west" class="form-control" >
         </div>
       </div>
        <div class="col">
         <div class="form-group">
           <label>South</label>
-          <input type="text" name="p_south" class="form-control" value="SE ">
+          <input type="text" name="p_south" class="form-control">
         </div>
       </div>
   </div>

@@ -134,8 +134,11 @@ else if(isset($_POST['add'])){
 	$south = $_POST['south'];
 	$prop_measurement = $_POST['prop_measurement'];
 	$prop_value = $_POST['prop_value'];
+	$prev_text_payment = $_POST['prev_text_payment'];
+	$payment_status = $_POST['payment_status'];
 	$compositive = $_POST['compositive'];
 	$status = $_POST['status'];
+	$appraiser = $_POST['appraiser'];
 
 		$property_insert = "INSERT INTO property
 			(
@@ -152,8 +155,11 @@ else if(isset($_POST['add'])){
 				south,
 				prop_measurement,
 				prop_value,
+				prev_text_payment,
+				payment_status,
 				team_id,
-				status
+				status,
+				office_appraiser_id
 			)
 			VALUES
 			(
@@ -170,14 +176,27 @@ else if(isset($_POST['add'])){
 				'$south',
 				'$prop_measurement',
 				'$prop_value',
+				'$prev_text_payment',
+				'$payment_status',
 				'$compositive',
-				'$status'
+				'$status',
+				'$appraiser'
 			)
 			";
 			$qry = $conn->query($property_insert) or trigger_error(mysqli_error($conn)." ".$property_insert);
 
 			if($qry){
-				echo "success";
+
+				$update = "UPDATE team SET status = 1 WHERE id = '$compositive'";
+				$runit = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
+				if($runit){
+					session_start();
+					$_SESSION['suc'] = "Record saved successfully";
+					header("location:../manage_owners.php");
+				}
+				else{
+					echo "error";
+				}
 			}
 			else{
 				echo "error";

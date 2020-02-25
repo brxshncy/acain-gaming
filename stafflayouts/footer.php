@@ -246,7 +246,6 @@ $.ajax({
           $(document).on('click','.edit_props',function(){
             let prop_id = $(this).attr('id');
             console.log(prop_id);
-
             $.ajax({
                 url:'ajax_calls/edit_property.php',
                 method:'post',
@@ -281,6 +280,21 @@ $.ajax({
                     console.log(err);
                 }
             })
+          })
+          $(document).on('click','.view_prev_owner',function(){
+                let prev_id = $(this).attr('id');
+                console.log(prev_id);
+                $.ajax({
+                    url:'ajax_calls/li_prev_owner.php',
+                    method:'POST',
+                    data:{id:prev_id},
+                    success:function(data){
+                        console.log(data);
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                })
           })
             $('.transfer_owner').click(function(){
                 let trans_id = $(this).attr('id');

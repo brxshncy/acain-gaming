@@ -4,7 +4,7 @@
     $title = 'Property Form';
     $pageTitle = 'Property Form';
     include ('stafflayouts/header.php');
-
+    require('controller/db.php');
  ?>
 <?php include('stafflayouts/sidebar.php'); ?>
 <div class="main-content-inner">
@@ -114,9 +114,14 @@
       <div class="col col-md-3">
         <div class="form-group">
           <label>Barangay</label>
-          <select name="property_brgy" class="form-control">
-            <option value=""></option>
-            <option value="Abuno">Abuno</option>
+          <select name="property_brgy" class="form-control form-control-lg">
+            <?php
+              $brgy = "SELECT * FROM barangay";
+              $brgy_q = $conn->query($brgy) or trigger_error(mysqli_error($conn)." ".$brgy);
+              while($a = mysqli_fetch_assoc($brgy_q)){ ?>
+              <option value="<?php echo $a['baranggay_name'] ?>"><?php echo $a['baranggay_name']; ?></option>
+            <?php }
+            ?>
           </select>
         </div>
       </div>
@@ -225,7 +230,7 @@
             <select name="compositive" class="form-control">
                 <option value=""></option>
                 <?php
-                    require('controller/db.php');
+                    
                     $surveyor = "SELECT * FROM team WHERE status = 0";
                     $qry = $conn->query($surveyor);
                     while($row = mysqli_fetch_assoc($qry)){ ?>
@@ -252,8 +257,8 @@
           </div>
         </div>
     </div>
-     <div class="row mt-4">
-        <div class="col col-md-4 pt-4">
+     <div class="row justify-content-center">
+        <div class="col col-md-6">
             <input type="hidden" name="status" value="0">
            <button type="submit" name="submit" class="btn btn-success btn-block">Submit</button>
         </div>

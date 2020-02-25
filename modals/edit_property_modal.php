@@ -23,19 +23,13 @@
                 <label>Barangay</label>
                 <select name="brgy" id="e_brgy" class="form-control">
                     <option value="">Select Barangay</option>
-                  <?php
-                        /*require('controller/db.php');
-                        $brgy = "SELECT * FROM barangay";
-                        $qry= $conn->query($brgy) or trigger_error(mysqli_error($conn)." ".$brgy);
-                        while($a = mysqli_fetch_assoc($qry)){?>
-                        <option value="<?php echo $a['baranggay_name'] ?>">
-                            <?php echo $a['baranggay_name'] ?> 
-                            
-                        </option>
-
-                    <?php  }*/
-                    ?>
-                    <option value="Abuno">Abuno</option>
+                 <?php
+              $brgy = "SELECT * FROM barangay";
+              $brgy_q = $conn->query($brgy) or trigger_error(mysqli_error($conn)." ".$brgy);
+              while($a = mysqli_fetch_assoc($brgy_q)){ ?>
+              <option value="<?php echo $a['baranggay_name'] ?>"><?php echo $a['baranggay_name']; ?></option>
+            <?php }
+            ?>
                 </select>
             </div>
         </div>

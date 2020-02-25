@@ -35,6 +35,7 @@
 						      <th scope="col" class="text-center">No.</th>
 						      <th scope="col" class="text-center">Current Owner</th>
 						      <th scope="col" class="text-center">Property ID</th>
+						       <th scope="col" class="text-center">Previous Owners</th>
 						      <th class="text-center">Property Address</th>
 						      <th class="text-center">Property Boundaries</th>
 						      <th scope="col" class="text-center">Action</th>
@@ -43,7 +44,7 @@
 					  <tbody>
 					  	<?php
 					  		require('controller/db.php');
-					  		$props = "SELECT *, CONCAT(o.fname,' ',o.mname,' ',o.lname) as name FROM property p LEFT JOIN owner o ON o.id = p.owner_id";
+					  		$props = "SELECT *,p.id as  p_id, (SELECT COUNT(hp.property_id) FROM history_owner_property hp LEFT JOIN property pp ON pp.id = hp.property_id WHERE p.id = hp.property_id) AS prev_owner, CONCAT(o.fname,' ',o.mname,' ',o.lname) as name FROM property p LEFT JOIN owner o ON o.id = p.owner_id";
 					  		$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 					  		$counter = 0;
 					  		while($row = mysqli_fetch_assoc($qry)){ 
@@ -53,20 +54,28 @@
 					  			<td class="text-center"><?php echo $counter; ?></td>
 					  			<td class="text-center"><?php echo ucwords($row['name']); ?></td>
 					  			<td class="text-center">
-					  				<a href="javascript:void()">
+					  				
 					  					<?php echo $row['property_id'] ?>
-					  				</a>
+					  			
+					  			</td>
+					  			<td class="text-center">
+					  				
+						  				<?php
+						  					echo $row['prev_owner'] == 0 ? "No previous owners" : "".$row['prev_owner']."";
+						  				?>
+					  				
 					  			</td>
 					  			<td class="text-center"><?php echo $row['property_address']; ?></td>
 					  			<td class="text-center"><?php echo "North: ".$row['north'].", East: ".$row['east'].",  West: ".$row['west'].", South: ".$row['south']; ?></td>
 					  			<td class="text-center">
-					  				<a href="previous_ownership_form.php?q=<?php echo $row['id'] ?>" title="Import Previous Ownership">
+					  			
+					  				<a href="previous_ownership_form.php?q=<?php echo $row['p_id'] ?>" title="Import Previous Ownership">
                                     	<i class="fa fa-eject ml-2 text-success"></i>
-                                	<a href="history_property.php?q=<?php echo $row['id'] ?>" title="View Property History">                           
+                                	<a href="history_property.php?q=<?php echo $row['p_id'] ?>" title="View Property History">                           
                                     	<i  class="fa fa-history ml-2"></i>
                                     </a>
 					  			</td>
-					  		</tr>
+					  		</tr>	
 					  	<?php } ?>
 					  </tbody>
     			 	</table>

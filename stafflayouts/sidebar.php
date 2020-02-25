@@ -10,10 +10,10 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>Manage Properties</span></a>
                                 <ul class="collapse">
                                      <li class="<?php echo $currentPage === 'Manage Properties' ? 'active' : '' ?>">
-                                        <a href="manage_properties.php">Manage Properties</a>
+                                        <a href="manage_properties.php">Property Records</a>
                                     </li>
                                     <li class="<?php echo $currentPage === 'Manage Property Owners' ? 'active' : '' ?>">
                                         <a href="manage_owners.php">Owner Records</a>
@@ -30,6 +30,7 @@
                                 </ul>
                             </li>
                         </ul>
+
                     </nav>
                 </div>
             </div>
