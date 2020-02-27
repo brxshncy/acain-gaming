@@ -61,9 +61,13 @@ if($uploadStatus == 1){
 		'$remarks'
 	)";
 	$qry = $conn->query($insert) or trigger_error(mysqli_error($conn)." ".$insert);
-	if($insert){
-		$response['status'] = 1;
-		$response['message'] = "Surveyed data submitted successfully!";
+	if($qry){
+		$update = "UPDATE property SET tm_status = 1 WHERE id ='$prop_id'";
+		$qryy = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
+		if($qryy){
+			$response['status'] = 1;
+			$response['message'] = "Details submitted successfully!";
+		}
 	}
 	else{
 		$response['status'] = 0;

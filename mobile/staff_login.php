@@ -36,4 +36,10 @@
 		}
 		
 	}
+	else if(isset($_POST['logout'])){
+		$_SESSION = array();
+
+		session_destroy();
+		echo json_encode("logout");
+	}
 ?>
