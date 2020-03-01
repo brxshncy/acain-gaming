@@ -6,7 +6,7 @@ if(isset($_POST['tm_id'])){
 	$qry = $conn->query($props_tm) or trigger_error(mysqli_error($conn)." ".$props_tm);
 	$a = mysqli_fetch_assoc($qry);
 
-	echo json_encode("PUKENG INA MO");
+	echo json_encode("BULLSHIT GAWAS NA BA!!!!");
 }
 else{
 	echo json_enocde("no data recieve");

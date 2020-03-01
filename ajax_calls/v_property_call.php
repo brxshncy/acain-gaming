@@ -4,7 +4,7 @@ require('../controller/db.php');
 
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
-	$props = "SELECT *, t.team_name as team, p.prev_text_payment AS  prev_tax, p.status as p_status, CONCAT(o.fname,' ',o.mname,' ',o.lname) as owner_name, o.address as owner_address, o.birthday as owner_bday, o.contact as owner_contact FROM property p LEFT JOIN team t ON t.id = p.team_id LEFT JOIN owner o ON p.owner_id = o.id WHERE p.id = '$id'";
+	$props = "SELECT *, t.team_name as team, p.prev_text_payment AS  prev_tax,CONCAT(o.fname,' ',o.mname,' ',o.lname) as owner_name, o.address as owner_address, o.birthday as owner_bday, o.contact as owner_contact FROM property p LEFT JOIN team t ON t.id = p.team_id LEFT JOIN owner o ON p.owner_id = o.id WHERE p.id = '$id'";
 	$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 	$d = mysqli_fetch_assoc($qry);
 
@@ -29,7 +29,6 @@ if(isset($_POST['id'])){
 	$data['prop_measurement'] = $d['prop_measurement']." sqm";
 	$data['prop_value'] = $d['prop_value'];
 	$data['team'] = $d['team'];
-	$data['status'] = $d['p_status'];
 	$data['prev_tax'] = date("F j, Y",strtotime($d['prev_tax']));
 
 

@@ -22,7 +22,6 @@ if(isset($_POST['id'])){
 	$data['prop_value'] = $a['prop_value'];
 	$data['prev_text_payment'] = $a['prev_text_payment'];
 	$data['payment_status'] = $a['payment_status'];
-	$data['status'] = $a['status'];
 	$data['team_name'] = $a['team_name'];
 
 	echo json_encode($data);

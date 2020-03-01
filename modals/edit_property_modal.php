@@ -152,7 +152,7 @@
          <div class="col col-md-6">
            <div class="form-group">
             <label>Status</label>
-            <input type="text" id="e_status" class="form-control" readonly="">
+            <input type="text" id="e_status" class="form-control" value="Unsurveyed" readonly="">
            </div>
         </div>
     </div>

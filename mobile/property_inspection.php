@@ -44,6 +44,7 @@ if($uploadStatus == 1){
 	$total_area = $_POST['total_area'];
 	$total_value = $_POST['total_value'];
 	$remarks = $_POST['remarks'];
+	$date_surveyed =  date("Y-m-d");
 
 
 	$insert = "INSERT INTO property_inspection (
@@ -61,7 +62,8 @@ if($uploadStatus == 1){
 		fourth,
 		total_area,
 		total_value,
-		remarks
+		remarks,
+		date_surveyed
 	) 
 	VALUES (
 		'$prop_idd',
@@ -78,7 +80,8 @@ if($uploadStatus == 1){
 		'$fourth',
 		'$total_area',
 		'$total_value',
-		'$remarks'
+		'$remarks',
+		'$date_surveyed'
 	)";
 	$qry = $conn->query($insert) or trigger_error(mysqli_error($conn)." ".$insert);
 	if($qry){

@@ -5,16 +5,16 @@ $response = array(
 );
 $uploadFile = '';
 $uploadStatus = 1;
-if(isset($_FILES["land_sketch"]["type"]) != ''){
+if(isset($_FILES["prop_title"]["type"]) != ''){
 	$uploadDir = "../uploads/";
 	$allowed = array("jpg","jpeg","png","JPEG");
-	$fileName = basename($_FILES['land_sketch']['name']);
+	$fileName = basename($_FILES['prop_title']['name']);
 	$targetFilePath = $uploadDir.$fileName;
 	$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
 	$allowExtension = array("JPEG","jpg","png","jpeg");
 	if(in_array($fileType,$allowExtension)){
-		if(move_uploaded_file($_FILES['land_sketch']['tmp_name'], $targetFilePath)){
+		if(move_uploaded_file($_FILES['prop_title']['tmp_name'], $targetFilePath)){
 			$uploadFile = $fileName;
 		}
 		else{
@@ -29,43 +29,56 @@ if(isset($_FILES["land_sketch"]["type"]) != ''){
 }
 if($uploadStatus == 1){
 	require('db.php');
-	$north = $_POST['north'];
-	$south = $_POST['south'];
-	$east = $_POST['east'];
-	$west = $_POST['west'];
-	$prop_id = $_POST['prop_id'];
-	$staff_id = $_POST['staff_id'];
-	$total_area = $_POST['total_area'];
+	$serial_number = $_POST['serial_number'];
+	$jf_no = $_POST['jf_no'];
+	$case_no = $_POST['case_no'];
+	$reg_date = $_POST['reg_date'];
+	$vol_no = $_POST['vol_no'];
+	$record_no = $_POST['record_no'];
+	$dec_no = $_POST['dec_no'];
+	$oct_no = $_POST['oct_no'];
+	$page_no = $_POST['page_no'];
+	$oct_no = $_POST['oct_no'];
 	$remarks = $_POST['remarks'];
+	$staff_id = $_POST['staff_id'];
+	$prop_id = $_POST['prop_id'];
 	$date_surveyed =  date("Y-m-d");
 
-	$insert = "INSERT INTO property_boundaries (
-		north,
-		south,
-		east,
-		west,
-		land_sketch,
-		prop_id,
-		staff_id,
-		total_area,
+	$insert = "INSERT INTO property_title (
+		serial_number,
+		jf_no,
+		case_no,
+		reg_date,
+		vol_no,
+		record_no,
+		dec_no,
+		page_no,
+		oct_no,
+		title_pic,
 		remarks,
+		staff_id,
+		prop_id,
 		date_surveyed
 	) 
 	VALUES (
-		'$north',
-		'$south',
-		'$east',
-		'$west',
+		'$serial_number',
+		'$jf_no',
+		'$case_no',
+		'$reg_date',
+		'$vol_no',
+		'$record_no',
+		'$dec_no',
+		'$page_no',
+		'$oct_no',
 		'$uploadFile',
-		'$prop_id',
-		'$staff_id',
-		'$total_area',
 		'$remarks',
+		'$staff_id',
+		'$prop_id',
 		'$date_surveyed'
 	)";
 	$qry = $conn->query($insert) or trigger_error(mysqli_error($conn)." ".$insert);
 	if($qry){
-		$update = "UPDATE property SET tm_status = 1 WHERE id ='$prop_id'";
+		$update = "UPDATE property SET exm_status = 1 WHERE id ='$prop_id'";
 		$qryy = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
 		if($qryy){
 			$response['status'] = 1;

@@ -15,7 +15,7 @@
                                      <li class="<?php echo $currentPage === 'Manage Properties' ? 'active' : '' ?>">
                                         <a href="manage_properties.php">Unsurveyed Properties</a>
                                     </li>
-                                     <li class="<?php echo $currentPage === 'Manage Property Owners' ? 'active' : '' ?>">
+                                     <li class="<?php echo $currentPage === 'Surveyed Properties' ? 'active' : '' ?>">
                                         <a href="surveyed_properties.php">Surveyed Properties</a>
                                     </li>
                                     <li class="<?php echo $currentPage === 'Manage Property Owners' ? 'active' : '' ?>">

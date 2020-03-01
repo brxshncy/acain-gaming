@@ -136,7 +136,7 @@
                     <div class="row mt-2">
                         <div class="col col-md-6">
                             <label>Status</label>
-                            <input type="text" class="form-control" id="status" readonly>
+                            <input type="text" class="form-control" id="status" value="Unsurveyed" readonly>
                         </div>
                          <div class="col col-md-6">
                             <label>Assigned Compositives:</label>

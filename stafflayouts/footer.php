@@ -143,12 +143,6 @@
                         $('#west').val(data.west);
                         $('#prev_date_paid').val(data.prev_tax);
                         $('#south').val(data.south);
-                        if(data.status == 0){
-                            $('#status').val("Unsurveyed");
-                        }
-                        else if(data.status == 1){
-                            $('#status').val("Surveyed");
-                        }
                         $('#team').val(data.team);
                         $('#view_modal').modal('show');
                     },
@@ -269,12 +263,6 @@ $.ajax({
                     $('#e_tax_payment').val(data.payment_status);
                     $('#e_prop_value').val(data.prop_value);
                     $('#e_surevyor').find(":selected").text(data.team_name);
-                    if(data.status == 0){
-                        $('#e_status').val("Unsurveyed");
-                    }
-                    else if(data.status == 1){
-                        $('#e_status').val("Surveyed");
-                    }
                     $('#edit_property_modal').modal('show');
                 },
                 error:function(err){    
@@ -357,6 +345,24 @@ $.ajax({
                     }
                 })
             })
+$(document).on('click','.vpb',function(){
+    let vpb_id = $(this).attr('id');
+    console.log(vpb_id);
+    $.ajax({
+        url:'ajax_calls/vpb.php',
+        method:'post',
+        dataType:'html',
+        data:{id:vpb_id},
+        success:function(data){
+            console.log(data);
+            $('#pbmb').html(data);
+            $('#pbm').modal('show');
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
+})
 
         })
     </script>
