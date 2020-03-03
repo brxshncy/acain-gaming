@@ -64,7 +64,7 @@
                       <tbody>
                         <?php
                             require('controller/db.php');
-                            $owners = "SELECT *, (SELECT COUNT(pp.owner_id) FROM owner oo LEFT JOIN property pp ON oo.id = pp.owner_id WHERE pp.owner_id = o.id) as number_properties, o.id as o_id FROM owner o  ORDER BY o.id DESC";
+                            $owners = "SELECT *, (SELECT COUNT(pp.owner_id) FROM owner oo LEFT JOIN property pp ON oo.id = pp.owner_id WHERE pp.owner_id = o.id) as number_properties, o.id as o_id FROM owner o ORDER BY o.id DESC";
                             $qry = $conn->query($owners) or trigger_error(mysqli_error($conn)." ".$owners);
                             $counter = 0;
                             if(mysqli_num_rows($qry) > 0){
@@ -74,10 +74,17 @@
                                     <td class="text-center"><?php echo ucwords($row['fname']." ".$row['mname']." ".$row['lname']); ?></td>
                                     <td class="text-center"><?php echo ucwords($row['address']); ?></td>
                                     <td class="text-center"><?php echo $row['contact']; ?></td>
-                                    <td class="text-center">
-                                        <a href="property_owned.php?q=<?php echo $row['o_id'] ?>"  title="<?php echo $row['number_properties']; ?> Property Owned">
-                                            <?php echo $row['number_properties']; ?>
-                                        </a>
+                                     <td class="text-center">
+                                    <?php
+                                    if($row['number_properties'] == 0){
+                                        echo "No property owned";
+                                        } else {?>
+                                     
+                                            <a href="property_owned.php?q=<?php echo $row['o_id'] ?>"  title="<?php echo $row['number_properties']; ?> Property Owned">
+                                                 <?php echo  $row['number_properties']; ?>
+                                            </a>
+                                        
+                                        <?php } ?>
                                     </td>
                                     <td class="text-center">
                                         <a href="add_property.php?q=<?php echo $row['o_id'] ?>" class="mr-2" id="<?php echo $row['o_id'] ?>" title="Add Properties">

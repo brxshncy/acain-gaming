@@ -72,7 +72,30 @@
       </div>
     </div>
   </div>
+    <div class="row">
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label>Civil Status</label>
+        <select name="status" class="form-control form-control-lg">
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+           <option value="Widowed">Widowed</option>
+        </select>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label>Gender</label>
+        <select name="gender" class="form-control form-control-lg">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          
+        </select>
+      </div>
+    </div>
+  </div>
   <hr>
+<!--
   <div class="row">
     <div class="col">
       <h5 class="text-center">Previous Property Details</h5>
@@ -149,7 +172,7 @@
           <input type="text" name="p_value" class="form-control">
         </div>
       </div>
-  </div>
+  </div>-->
   <div class="row mt-3">
       <div class="col col-md-6">
         <div class="form-group">

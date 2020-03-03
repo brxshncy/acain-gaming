@@ -363,6 +363,40 @@ $(document).on('click','.vpb',function(){
         }
     })
 })
+$(document).on('click','.vpt',function(){
+    let id = $(this).attr('id');
+    console.log(id);
+    $.ajax({
+        url:'ajax_calls/vpt.php',
+        method:'post',
+        dataType:'html',
+        data:{id:id},
+        success:function(data){
+            $('#pbtm').html(data);
+            $('#pbt').modal('show');
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
+})
+$(document).on('click','.vpi',function(){
+    let id = $(this).attr('id');
+    console.log(id);
+    $.ajax({
+        url:'ajax_calls/vpi.php',
+        method:'post',
+        dataType:'html',
+        data:{id:id},
+        success:function(data){
+            $('#pibm').html(data);
+            $('#pib').modal('show');
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
+})
 
         })
     </script>

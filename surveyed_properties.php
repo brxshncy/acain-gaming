@@ -56,7 +56,7 @@
 					  <tbody>
 					    <?php
 					    require('controller/db.php');
-					    $props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,pb.remarks as pb_remarks,pi.remarks as pi_remarks,pt.remarks as pt_remarks, p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street,pi.staff_id as appraiser,pt.staff_id as examiner,pb.staff_id as tax_mapper, p.city as city, p.id as p_id, t.team_name as team FROM property p  LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id LEFT JOIN property_boundaries pb ON pb.prop_id = p.id LEFT JOIN property_inspection pi ON pi.prop_id = p.id LEFT JOIN property_title pt ON pt.prop_id = p.id LEFT JOIN staff s ON s.id = pb.staff_id WHERE p.tm_status = 1 AND p.apr_status = 1 AND p.exm_status = 1 ORDER BY p.id DESC";
+					    $props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,pb.total_area as total_area,pi.total_value as total_value,p.tm_status as tm_status,pb.remarks as pb_remarks,pi.remarks as pi_remarks,pt.remarks as pt_remarks, p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street,pi.staff_id as appraiser,pt.staff_id as examiner,pb.staff_id as tax_mapper, p.city as city, p.id as p_id, t.team_name as team FROM property p  LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id LEFT JOIN property_boundaries pb ON pb.prop_id = p.id LEFT JOIN property_inspection pi ON pi.prop_id = p.id LEFT JOIN property_title pt ON pt.prop_id = p.id LEFT JOIN staff s ON s.id = pb.staff_id WHERE p.tm_status = 1 AND p.apr_status = 1 AND p.exm_status = 1 ORDER BY p.id DESC";
 					    	$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 					    	$counter = 0;
 
@@ -86,13 +86,13 @@
 					    	<td class="text-center"><?php echo ucwords($a['name']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_id']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_brgy']." ".$a['street']." ".$a['city']); ?></td>
-                            <td class="text-center"><?php echo number_format($a['measurement'],-1)." sqm"; ?></td>
-                            <td class="text-center">&#8369; <?php  echo number_format($a['value']) ?></td>
+                            <td class="text-center"><?php echo number_format($a['total_area'],-1)." sqm"; ?></td>
+                            <td class="text-center">&#8369; <?php  echo number_format($a['total_value']) ?></td>
                             <?php
                                 $tax = "SELECT * FROM tax_percentage";
                                 $qry_1 =$conn->query($tax) or trigger_error(mysqli_error($conn)." ".$tax);
                                 $b = mysqli_fetch_assoc($qry_1);
-                                $tax =  $a['value'] * $b['tax'];
+                                $tax =  $a['total_value'] * $b['tax'];
                             ?>  
                             <td class="text-center">
                                &#8369; <?php echo number_format($tax) ?>
@@ -141,6 +141,8 @@
                             </td>
 
                             <td class="text-center">
+                                <?php
+                                    if($a['pb_remarks'] == "Approved" && $a['pi_remarks'] == "Approved" && $a['pt_remarks'] == "Approve"){ ?>
                                 <a href="javascript:void(0)" title="View Property Boundaries" class="mr-1 vpb" id="<?php echo $a['p_id'] ?>">
                                     <i  class="fa fa-folder-open text-success"></i>
                                 </a>
@@ -148,8 +150,24 @@
                                     <i  class="fa fa-folder-open text-primary"></i>
                                 </a>
                                  <a href="javascript:void(0)" title="View Property Inspection" class="vpi" id="<?php echo $a['p_id'] ?>">
-                                    <i  class="fa fa-folder-open text-info"></i>
+                                    <i  class="fa fa-folder-open text-black"></i>
                                 </a>
+                                 <a href="transfer_ownership.php?q=<?php echo $a['p_id'] ?>" title="Transfer of Ownership">
+                                    <i  class="fa fa-paste text-danger"></i>
+                                </a>
+
+                                <?php  } else { ?>
+                                <a href="javascript:void(0)" title="View Property Boundaries" class="mr-1 vpb" id="<?php echo $a['p_id'] ?>">
+                                    <i  class="fa fa-folder-open text-success"></i>
+                                </a>
+                                 <a href="javascript:void(0)" title="View Property Title" class="vpt mr-1" id="<?php echo $a['p_id'] ?>">
+                                    <i  class="fa fa-folder-open text-primary"></i>
+                                </a>
+                                 <a href="javascript:void(0)" title="View Property Inspection" class="vpi" id="<?php echo $a['p_id'] ?>">
+                                    <i  class="fa fa-folder-open text-black"></i>
+                                </a>
+                                <?php } ?>
+
                             </td>
 					    </tr>
 					    <?php }
