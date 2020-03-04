@@ -55,6 +55,20 @@
              $('#update_tax').click(function(){
                 $('#tax_modal').modal('show');
              })
+             $(document).on('click','.confirm',function(){
+                let id = $(this).attr('id');
+                $.ajax({
+                    url:'ajax_calls/payment.php',
+                    method:'post',
+                    data:{id:id},
+                    success:function(data){
+                        location.reload();
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                })
+             })
         })
     </script>
 </body>

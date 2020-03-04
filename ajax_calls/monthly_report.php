@@ -4,7 +4,7 @@ require('../controller/db.php');
 if(isset($_POST['m'])){
 	$m = $_POST['m'];
 	$counter = 0;
-	$month = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.date_inquire as date_inquire, p.status as status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE MONTH(p.date_inquire) = '$m' ORDER BY p.id DESC";
+	$month = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.date_inquire as date_inquire, p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE MONTH(p.date_inquire) = '$m' ORDER BY p.id DESC";
 	$qry = $conn->query($month) or trigger_error(mysqli_error($conn)." ".$month);
 if(mysqli_num_rows($qry)> 0){
 	while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>
@@ -30,10 +30,10 @@ if(mysqli_num_rows($qry)> 0){
                             </td>
                             <td class="text-center">
                                 <?php
-                                    if($a['status'] == 0){
+                                    if($a['tm_status'] == 0 && $a['tm_status'] == 0 && $a['tm_status'] == 0){
                                         echo "<span class='badge badge-warning'>Unsurveyed</span>";
                                     }
-                                    else if($a['status'] == 1){
+                                    else if($a['tm_status'] == 1 && $a['tm_status'] == 1 && $a['tm_status'] == 1){
                                         echo "<span class='badge badge-success'>Surveyed</span>";
                                     }
                                 ?>
@@ -54,7 +54,7 @@ if(mysqli_num_rows($qry)> 0){
 if(isset($_POST['y'])){
 	$y = $_POST['y'];
 	$counter = 0;
-	$month = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.date_inquire as date_inquire, p.status as status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE YEAR(p.date_inquire) = '$y' ORDER BY p.id DESC";
+	$month = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.date_inquire as date_inquire, p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE YEAR(p.date_inquire) = '$y' ORDER BY p.id DESC";
 	$qry = $conn->query($month) or trigger_error(mysqli_error($conn)." ".$month);
 if(mysqli_num_rows($qry)> 0){
 	while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>
@@ -80,10 +80,10 @@ if(mysqli_num_rows($qry)> 0){
                             </td>
                             <td class="text-center">
                                 <?php
-                                    if($a['status'] == 0){
+                                    if($a['tm_status'] == 0 && $a['tm_status'] == 0 && $a['tm_status'] == 0){
                                         echo "<span class='badge badge-warning'>Unsurveyed</span>";
                                     }
-                                    else if($a['status'] == 1){
+                                    else if($a['tm_status'] == 1 && $a['tm_status'] == 1 && $a['tm_status'] == 1){
                                         echo "<span class='badge badge-success'>Surveyed</span>";
                                     }
                                 ?>

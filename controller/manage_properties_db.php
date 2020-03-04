@@ -25,7 +25,7 @@ require('db.php');
 		$prop_measurement = $_POST['prop_measurement'];
 		$prev_text_payment = $_POST['prev_text_payment'];
 		$prop_value = $_POST['prop_value'];
-		$payment_status = $_POST['payment_status'];
+		$payment_status = "";
 		$team_id = $_POST['compositive'];
 		$status = $_POST['status'];
 		$appraiser = $_POST['appraiser'];

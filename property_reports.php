@@ -74,7 +74,7 @@
                       <tbody id="prop_reports">
                         <?php
                             require('controller/db.php');
-                            $props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name, p.status as status,p.prop_measurement as measurement, p.date_inquire as date_inquire, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id ORDER BY p.id DESC";
+                            $props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name, p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.date_inquire as date_inquire, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city,pb.total_area as area, p.id as p_id,pi.total_value as total_value FROM property p left join property_inspection pi on pi.prop_id = p.id left join property_boundaries pb on pb.prop_id = p.id LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id ORDER BY p.id DESC";
                             $qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
                             $counter = 0;
                             while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>
@@ -87,8 +87,8 @@
                             <td class="text-center"><?php echo ucwords($a['name']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_id']); ?></td>
                             <td class="text-center"><?php echo ucwords($a['property_brgy']." ".$a['street']." ".$a['city']); ?></td>
-                            <td class="text-center"><?php echo number_format($a['measurement'],-1)." sqm"; ?></td>
-                            <td class="text-center">&#8369; <?php  echo number_format($a['value']) ?></td>
+                            <td class="text-center"><?php echo $a['area'] == 0 ?  'No official data yet' : number_format($a['area'],-1)." sqm"; ?></td>
+                            <td class="text-center"><?php echo $a['total_value'] == 0 ? 'No official data yet':"&#8369; ".number_format($a['total_value']) ?></td>
                             <?php
                                 $tax = "SELECT * FROM tax_percentage";
                                 $qry_1 =$conn->query($tax) or trigger_error(mysqli_error($conn)." ".$tax);
@@ -100,10 +100,10 @@
                             </td>
                             <td class="text-center">
                                 <?php
-                                    if($a['status'] == 0){
+                                    if($a['tm_status'] == 0 && $a['tm_status'] == 0 && $a['tm_status'] == 0){
                                         echo "<span class='badge badge-warning'>Unsurveyed</span>";
                                     }
-                                    else if($a['status'] == 1){
+                                    else if($a['tm_status'] == 1 && $a['tm_status'] == 1 && $a['tm_status'] == 1){
                                         echo "<span class='badge badge-success'>Surveyed</span>";
                                     }
                                 ?>

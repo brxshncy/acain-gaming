@@ -158,28 +158,19 @@
 $(document).on('click','.v_history_details',function(){
 let h_id = $(this).attr('id');
 console.log(h_id);
-$('#history_modal').modal('show');
 $.ajax({
     url:'ajax_calls/history_props.php',
-    smethod:'post',
-    sdata:{id:h_id},
-    sdataType:'JSON',
+    method:'post',
+    data:{id:h_id},
+    dataType:'JSON',
     success:function(data){ 
     console.log(data);
     $('#date_inquired').val(data.date_transfer);
     $('#property_id').val(data.p_id);
     $('#owner_name').val(data.name);
-    $('#address').val(data.owner_address);
-    $('#contact').val(data.p_contact);
+    $('#address').val(data.address);
+    $('#contact').val(data.contact);
     $('#age').val(data.age);
-    $('#kind_prop').val(data.p_kind_property);
-    $('#actual_use').val(data.p_actual_use);
-    $('#prop_measurement').val(data.p_measurement);
-    $('#prop_value').val(data.p_value);
-     $('#north').val(data.p_north);
-    $('#east').val(data.p_east);
-    $('#west').val(data.p_west);
-    $('#south').val(data.p_south);
     $('#history_modal').modal('show');
     },
     error:function(err){

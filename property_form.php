@@ -217,16 +217,6 @@
                 <input type="number" class="form-control" name="prop_measurement">
             </div>
         </div>
-        <div class="col col-md-6">
-            <div class="form-group">
-                <label>Tax Payment Status</label>
-                <select name="payment_status" class="form-control">
-                  <option value=""></option>
-                  <option value="Paid">Paid</option>
-                  <option value="Unpaid">Unpaid</option>
-                </select>
-            </div>
-        </div>
     </div>
     <hr>
     <div class="row mt-4">

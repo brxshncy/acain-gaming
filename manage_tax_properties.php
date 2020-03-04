@@ -45,13 +45,12 @@
                           <th scope="col" class="text-center">Date Previous Tax Payment</th>
                           <th scope="col" class="text-center">Penalty</th>
 					      <th class="text-center">Status</th>
-					      <th scope="col" class="text-center">Action</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					       <?php
                             require('controller/db.php');
-                            $props = "SELECT *, CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p. property_id as prop_id,p.prop_value as prop_value FROM property p LEFT JOIN owner o ON o.id = p.owner_id ORDER BY p.id DESC";
+                            $props = "SELECT *, CONCAT(o.fname,' ',o.mname,' ',o.lname) as name, p.id as p_id,p. property_id as prop_id,pi.total_value as prop_value FROM property p LEFT JOIN owner o ON o.id = p.owner_id LEFT JOIN property_inspection pi ON pi.prop_id = p.id ORDER BY p.id DESC";
                             $qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
                             $counter = 0;
                             while($a = mysqli_fetch_assoc($qry)){ $counter++;?>
@@ -59,7 +58,18 @@
                                 <td class="text-center"><?php echo $counter; ?></td>
                                 <td class="text-center"><?php echo ucwords($a['name']); ?></td>
                                 <td class="text-center"><?php echo $a['prop_id']; ?></td>
-                                <td class="text-center"><?php echo $a['prop_value']; ?></td>
+                                <td class="text-center">
+
+                                    <?php 
+                                    if($a['prop_value'] == 0){
+                                        echo "Not yet surveyed";
+                                    }
+                                    else{
+                                        echo "&#8369; ".number_format($a['prop_value'],-1); 
+                                    }
+                                    ?>
+                                        
+                                </td>
                                 <?php
                                     $tax = "SELECT * FROM tax_percentage";
                                     $q = $conn->query($tax) or trigger_error(mysqli_error($conn)." ".$tax);
@@ -67,28 +77,72 @@
                                     $tax_rate = $b['tax'];
                                     $penalty_rate = $b['penalty'];
                                     $annual_tax = $a['prop_value'] * $tax_rate;
-                                    $date_pay = date("Y",strtotime($a['prev_text_payment']));
-                                    $curr_year = date("Y");
-                                    $nopay_year = $curr_year - $date_pay;
-                                    $total_penalty = $a['prop_value'] * $penalty_rate * $nopay_year * 12;
                                 ?>
-                                <td class="text-center"><?php echo $annual_tax; ?></td>
+                                <td class="text-center"><?php echo "&#8369; ".$annual_tax; ?></td>
                                 <?php
                                     $prev_payment = date("F j, Y",strtotime($a['prev_text_payment']))
                                 ?>
-                                <td class="text-center"><?php echo $prev_payment; ?></td>
-                                <td class="text-center"><?php echo $total_penalty; ?></td>
+                                <td class="text-center">
+                                    <?php echo $prev_payment; ?>
+                                </td>
+                                <td class="text-center">
+                                  <?php
+                                    if($a['prop_value'] == 0){
+                                        echo "N/A";
+                                    }
+                                    else{
+                                            if($a['payment_status'] == 0){
+                                        if(date("Y") == date("Y",strtotime($a['prev_text_payment']))){
+                                            $penalty = $a['prop_value'] * $penalty_rate * date("m") - date("m",strtotime($a['prev_text_payment']));
+                                            echo "&#8369; ".number_format($penalty,-1);
+                                        }
+                                        else{
+                                               $year_gap = date("Y") - date("Y",strtotime($a['prev_text_payment']));
+                                               $month_gap = $year_gap * 12;
+                                               $gap = $month_gap  = date("m",strtotime($a['prev_text_payment']));
+                                               $y = "&#8369; ".number_format($a['prop_value'] * $penalty_rate * $gap,-1);
+                                              echo  "&#8369; ".number_format($a['prop_value'] * $penalty_rate * $gap,-1);
+                                        }
+                                    }
+                                    else{
+                                        echo "<p class='text-success'>Paid</p>";
+                                    }
+
+                                    }
+                                
+                                  ?>       
+                                </td>
                                 <td class="text-center">
                                 <?php
-                                    if($a['payment_status'] == 'Paid'){
-                                        echo "<span class='badge badge-warning p-2'>Paid</span>";
-                                    }
-                                    else if($a['payment_status'] == 'Unpaid'){
-                                        echo "<span class='badge badge-warning p-2'>Unpaid</span>";
-                                    }
-                                ?>
+                                    if($a['payment_status'] == ''){?>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#<?php echo $a['p_id'];  ?>">
+                                        <span class='badge badge-warning p-2'>Unpaid</span>
+                                    </a>
+                                    <?php }
+                                    else if($a['payment_status'] == 1){?>
+
+                                        <span class='badge badge-success p-2'>Paid</span>
+                                   <?php } ?>
                                 </td>
-                                <td class="text-center"><?php echo $a['prop_id']; ?></td>
+<div class="modal fade" id="<?php echo $a['p_id'];  ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Payment Status?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           Please confirm your action
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="<?php echo $a['p_id']; ?>"  class="btn btn-primary confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
                             </tr>
                             <?php }
                            ?>
@@ -96,6 +150,9 @@
 					</table>
                 </div>
     	</div>
-    </div>		
+    </div>	
+
 </div>
+<!-- Modal -->
+
 <?php include ('treasurer/footer.php'); ?>

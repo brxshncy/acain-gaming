@@ -26,7 +26,7 @@
 
  <div class="main-content-inner">
      <div class="row justify-content-center">
-        <div class="col col-md-8">
+        <div class="col col-md-12">
         	<?php
         		if(isset($_SESSION['team-added'])):?>
         			<div class="row mt-2">
@@ -60,41 +60,37 @@
                     	<thead>
 						    <tr>
 						      <th scope="col" class="text-center">No.</th>
-						      <th scope="col" class="text-center">Compositives</th>
-						      <th class="text-center">Status</th>
-						      <th scope="col" class="text-center">Action</th>
+						      <th scope="col" class="text-center">Owner</th>
+						      <th class="text-center">Property Location</th>
+						      <th scope="col" class="text-center">Status</th>
 						    </tr>
 					  </thead>
 					  <tbody>
 					  	<?php
 					  		require('controller/db.php');
-					  		$team = "SELECT * FROM team ";
-					  		$qry = $conn->query($team) or trigger_error(mysqli_error($conn)." ".$team);
+					  		$id = $_GET['q'];
+					  		$logs = "SELECT *, CONCAT(o.fname,' ',o.lname) as name FROM property p LEFT JOIN owner o ON o.id = p.owner_id WHERE p.team_id = '$id'";
+					  		$qry = $conn->query($logs) or trigger_error(mysqli_error($conn)." ".$logs);
 					  		$counter = 0;
-					  		while($row = mysqli_fetch_assoc($qry)){ $counter++; ?>
-					  		<tr>
-					  			<td class="text-center"><?php echo $counter; ?></td>
-					  			<td class="text-center"><?php echo $row['team_name']; ?></td>
-					  			<td class="text-center">
-					  				<?php
-					  					if($row['status'] == 0){
-					  						echo "<span class='badge badge-warning p-2'>Standby</span>";
-					  					}
-					  					else if($row['status'] == 1){
-					  						echo "<span class='badge badge-info p-2'>On Operation</span>";
-					  					}
-					  				?>
-					  			</td>
-					  			<td class="text-center">
-					  			 <a href="members.php?q=<?php echo $row['id'] ?>" >
-					  				<i class="fa fa-users text-info" title="Members" data-placement="top"></i>
-					  			</a>
-					  			<a href="activity_logs.php?q=<?php echo $row['id'] ?>">
-					  				<i class="fa fa-tasks text-success ml-2" title="Activity Logs"></i>
-					  			</td>
-					  		</tr>
-					  	<?php	}
-					  	?>
+					  		if(mysqli_num_rows($qry) > 0){
+					  			while($a = mysqli_fetch_assoc($qry)){$counter++;?>
+					  	<tr>
+					  		<td class="text-center"><?php echo $counter; ?></td>
+					  		<td class="text-center"><?php echo ucwords($a['name']); ?></td>
+					  		<td class="text-center"><?php echo ucwords($a['property_brgy']." ".$a['street']." ".$a['city']); ?></td>
+					  		<td class="text-center">
+					  			<?php
+					  				if($a['tm_status'] == 0 && $a['apr_status'] == 0 && $a['exm_status'] == 0){
+					  					echo "<span class='badge badge-warning p-2'>Unserveyed</span>";
+					  				}
+					  				else{
+					  					echo "<span class='badge badge-info p-2'>Surveyed</span>";
+					  				}
+					  			?>
+					  				
+					  		</td>
+					  	</tr>
+					  	<?php } } ?>
 					  </tbody>
                     </table>
                 </div>

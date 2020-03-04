@@ -24,7 +24,7 @@
 						    <tr>
 						      <th scope="col" class="text-center">No.</th>
 						      <th scope="col" class="text-center">Previous Owner</th>
-						      <th class="text-center">Lot Value</th>
+						      <th class="text-center">Transference</th>
 						      <th class="text-center">Date Acquired</th>
 						      <th scope="col" class="text-center">Action</th>
 						    </tr>
@@ -34,7 +34,7 @@
 					  		if(isset($_GET['q'])){
 					  			$id = $_GET['q'];
 					  			require('controller/db.php');
-						  		$history = "SELECT *, CONCAT(h.p_fname,' ',h.p_lname) as name,h.id as h_id, h.p_value as lot_value, h.date_transfer as date_transfer FROM history_owner_property h LEFT JOIN property p ON h.id = p.property_id WHERE h.property_id = '$id'";
+						  		$history = "SELECT *, CONCAT(o.fname,' ',o.lname) as name,h.id as h_id, h.date_transfer as date_transfer FROM history_owner_property h LEFT JOIN owner o ON h.owner_id = o.id WHERE h.property_id = '$id'";
 						  		$qry = $conn->query($history) or trigger_error(mysqli_error($conn)." ".$history);
 						  		$counter = 0;
 						  		if(mysqli_num_rows($qry) > 0){
@@ -42,7 +42,7 @@
 						  				<tr>
 					  			<td class="text-center"><?php echo $counter; ?> </td>
 					  			<td class="text-center"><?php echo ucwords($a['name']); ?> </td>
-					  			<td class="text-center"><?php echo $a['lot_value']; ?> </td>
+					  			<td class="text-center"><?php echo $a['kind_transfer']; ?> </td>
 					  			<?php
 					  				$date_transfer = date("F j, Y",strtotime($a['date_transfer']));
 					  			?>
@@ -50,9 +50,6 @@
 					  			<td class="text-center">
 					  				<a href="javascript:void(0)" class="v_history_details" id="<?php echo $a['h_id'] ?>" title="View Full Details">
 					  						<i class="fa fa-eye text-success"></i>
-					  				</a>
-					  				<a href="javascript:void(0)" class="e_history_details" id="<?php echo $a['h_id'] ?>" title="Edit">
-					  					<i class="fa fa-edit text-info ml-2"></i>
 					  				</a>
 					  			</td>
 					  		</tr>

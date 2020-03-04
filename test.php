@@ -1,31 +1,25 @@
 <?php
 
-	$last_payment = date("Y",strtotime("2001-09-01"));
+$currDate = date("Y");
+$penalty = 5;
+$last_tax = "2011-03-04";
+/*echo date("Y")." ".date("Y",strtotime($last_tax))."<br";*/
 
-	$present_year = date("Y");
+if(date("Y") == date("Y",strtotime($last_tax))){
+	$current_gap =  date("m",strtotime($last_tax)) - date("m") ;
+	echo $current_gap;
+}
+else{
+	$year_gap = $currDate - date("Y",strtotime($last_tax));
+	$month_gap = $year_gap * 12 ;
+	$invoice_gap  = $month_gap - date("m",strtotime($last_tax));
+	$total_penalty = $invoice_gap ;
+	echo $total_penalty * $penalty;
+}
 
-	$no_pay = $present_year - $last_payment;
-
-	$property_value = 1000000;
-
-
-	$tax_percentage = 0.02375;
-
-	$tax_value = $property_value * $tax_percentage;
-
-	$penalty_value = .02;
-
-	$penalty = $property_value * $penalty_value;
-
-	$total_penalty = $no_pay * $penalty * 12;
-
-	echo "Last payment: ".$last_payment."<br>";
-	echo "Year today:: ".$present_year."<br>";
-	echo "Current Property Value: ".$property_value."<br>";
-	echo "Tax Percentage: ".$tax_percentage."<br>";
-	echo "Tax Value: ".$tax_value."<br>";
-	echo "Penalty Value: ".$penalty_value."<br>";
-	echo "Penalty per month: ".$penalty."<br>";
-	echo "Total Penalty: ".$total_penalty."<br>";
 
 ?>
+
+
+
+

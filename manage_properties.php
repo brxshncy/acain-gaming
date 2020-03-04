@@ -55,7 +55,7 @@
 					  <tbody>
 					    <?php
 					    	require('controller/db.php');
-					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id  ORDER BY p.id DESC";
+					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id,t.id as t_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id  ORDER BY p.id DESC";
 					    	$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 					    	$counter = 0;
 					    	while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>
@@ -76,6 +76,16 @@
                                &#8369; <?php echo number_format($tax) ?>
                             </td>
                             <td class="text-center">
+                                <?php 
+                                    if($a['tm_status'] == 1 && $a['exm_status'] == 1 && $a['apr_status'] == 1){
+                                        $team_id = $a['t_id'];
+                                        $update = "UPDATE team SET status = 0 WHERE id =' $team_id'";
+                                        $qry_2 = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
+                                        if($qry_2){
+                                            echo "";
+                                        }
+                                    }
+                                ?>
                                 <?php
                                     if($a['tm_status'] == 0){
                                         echo "<i class='fa fa-close text-danger'></i>";
