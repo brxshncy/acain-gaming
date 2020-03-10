@@ -76,7 +76,9 @@ require('db.php');
 				prev_text_payment,
 				payment_status,
 				team_id,
-				status,
+				tm_status,
+				apr_status,
+				exm_status,
 				office_appraiser_id
 			)
 			VALUES
@@ -97,7 +99,9 @@ require('db.php');
 				'$prev_text_payment',
 				'$payment_status',
 				'$team_id',
-				'$status',
+				0,
+				0,
+				0,
 				'$appraiser'
 			)
 			";
