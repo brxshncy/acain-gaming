@@ -128,7 +128,6 @@ else if(isset($_POST['add'])){
 	$owner_id = $_POST['owner_id'];
 	$prop_id = $_POST['prop_id'];
 	$property_brgy = $_POST['property_brgy'];
-	$property_address = $_POST['property_address'];
 	$street = $_POST['street'];
 	$city = $_POST['city'];
 	$kind_prop = $_POST['kind_prop'];
@@ -140,7 +139,6 @@ else if(isset($_POST['add'])){
 	$prop_measurement = $_POST['prop_measurement'];
 	$prop_value = $_POST['prop_value'];
 	$prev_text_payment = $_POST['prev_text_payment'];
-	$payment_status = $_POST['payment_status'];
 	$compositive = $_POST['compositive'];
 	$status = $_POST['status'];
 	$appraiser = $_POST['appraiser'];
@@ -163,9 +161,10 @@ else if(isset($_POST['add'])){
 				prop_measurement,
 				prop_value,
 				prev_text_payment,
-				payment_status,
 				team_id,
-				status,
+				tm_status,
+				apr_status,
+				exm_status,
 				office_appraiser_id
 			)
 			VALUES
@@ -174,9 +173,8 @@ else if(isset($_POST['add'])){
 				'$owner_id',
 				'$prop_id',
 				'$property_brgy',
-				'$property_address',
 				'$street',
-				'$city'
+				'$city',
 				'$kind_prop',
 				'$actual_use',
 				'$north',
@@ -186,9 +184,10 @@ else if(isset($_POST['add'])){
 				'$prop_measurement',
 				'$prop_value',
 				'$prev_text_payment',
-				'$payment_status',
 				'$compositive',
-				'$status',
+				0,
+				0,
+				0,
 				'$appraiser'
 			)
 			";
