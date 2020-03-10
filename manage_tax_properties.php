@@ -114,13 +114,12 @@
                                 </td>
                                 <td class="text-center">
                                 <?php
-                                    if($a['payment_status'] == ''){?>
+                                    if($a['payment_status'] == 0){?>
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#<?php echo $a['p_id'];  ?>">
                                         <span class='badge badge-warning p-2'>Unpaid</span>
                                     </a>
                                     <?php }
                                     else if($a['payment_status'] == 1){?>
-
                                         <span class='badge badge-success p-2'>Paid</span>
                                    <?php } ?>
                                 </td>
