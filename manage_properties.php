@@ -55,7 +55,7 @@
 					  <tbody>
 					    <?php
 					    	require('controller/db.php');
-					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id,t.id as t_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id  ORDER BY p.id DESC";
+					    	$props = "SELECT CONCAT(o.fname,' ',o.mname,' ',o.lname) as name,p.tm_status as tm_status,p.apr_status as apr_status,p.exm_status as exm_status,p.prop_measurement as measurement, p.prop_value as value,p.property_id as property_id,p.property_brgy as property_brgy, p.street as street, p.city as city, p.id as p_id,t.id as t_id FROM property p LEFT JOIN team t ON p.team_id = t.id LEFT JOIN owner o ON o.id = p.owner_id WHERE p.tm_status =0 AND p.apr_status = 0 AND p.exm_status = 0   ORDER BY p.id DESC";
 					    	$qry = $conn->query($props) or trigger_error(mysqli_error($conn)." ".$props);
 					    	$counter = 0;
 					    	while($a = mysqli_fetch_assoc($qry)){ $counter++; ?>

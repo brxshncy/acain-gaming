@@ -13,6 +13,7 @@ if(isset($_POST['submit'])){
 		$role = $_POST['role'];
 		$team = $_POST['team'];
 
+
 		$insert = "INSERT INTO 
 		staff 
 		(
