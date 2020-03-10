@@ -110,7 +110,7 @@
                                     if($a['pb_remarks'] == "Approved"){
                                         echo "<i class='fa fa-check text-success'></i>";
                                     }
-                                    else if($a['pb_remarks'] == 1){
+                                    else if($a['pb_remarks'] == "Not Approved"){
                                         echo "<i class='fa fa-check text-success'></i>";
                                     }
                                 ?>
@@ -122,7 +122,7 @@
                                     if($a['pt_remarks'] == "Approve"){
                                         echo "<i class='fa fa-check text-success'></i>";
                                     }
-                                    else if($a['pt_remarks'] == 1){
+                                    else if($a['pt_remarks'] == "Not Approve"){
                                         echo "<i class='fa fa-check text-success'></i>";
                                     }
                                 ?>
@@ -134,7 +134,7 @@
                                     if($a['pi_remarks'] == "Approved"){
                                        echo "<i class='fa fa-check text-success'></i>";
                                     }
-                                    else if($a['pi_remarks'] == 1){
+                                    else if($a['pi_remarks'] == "Not Approved"){
                                         echo "<i class='fa fa-check text-success'></i>";
                                     }
                                 ?>
